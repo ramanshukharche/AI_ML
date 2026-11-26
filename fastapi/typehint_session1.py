@@ -1,20 +1,16 @@
 str1  = 'Ramanshu'
-
 print(type(str1))
 
 a = 10
-
 print(type(a))
 
 
 a = '10'
-
 print(type(a))
 
 print('-'*20)
 
 text: str = "Ramanshu"
-
 text1: str = '1000'
 
 print(type(text))
@@ -68,7 +64,7 @@ def get_items(item_a: str, item_b: int, item_c: float, item_d: bool, item_e: byt
 print(get_items('Ramanshu', 23, 5.9, True, b"a"))
 
 print('-'*20)
-
+  
 from typing import Any
 def random_func(data: Any):
     return data
@@ -133,6 +129,10 @@ print(reverse_array(['1','2',]))
 
 print('-'*20)
 
+class Student:
+    def __init__(self, name: str):
+        self.name = name
+
 class Person:
     def __init__(self, name: str):
         self.name = name
@@ -141,5 +141,36 @@ def get_person_name(one_person: Person) -> str:
     return one_person.name
 
 p = Person('Ram')
+s = Student('Ajinkya')
 
 print(get_person_name(p))
+print(get_person_name(s))
+
+# Literals in TypeHint
+
+from typing import Literal
+
+def set_access(name: str, role: Literal['admin', 'editor', 'viewer']) -> str:
+    return f'{name} has a {role} permission'
+
+print(set_access('Ram', 'admin'))
+print(set_access('shyam', 'viewer'))
+print(set_access('sundar','xyz'))      # it executed according typehint bcz typehint don't enforce 
+
+# TypeHint just is a reference for developer like expected data_type for specified variable (its like documentation for developer)
+# TypeHint don't enforce(not compulsory) it just specify datatype for variable
+
+print('-'*20)
+
+# Enum in TypeHint 
+
+from enum import Enum
+class Role(Enum):
+    ADMIN = 'admin'
+    EDITOR = 'editor'
+    VIEWER = 'viewer'
+
+def assign_role(user: str, role: Role) -> str:
+    return f"{user} has a role name {role.name} , role value {role.value}"
+
+print(assign_role('Ramanshu', Role.ADMIN))
