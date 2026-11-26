@@ -1,6 +1,6 @@
 str1  = 'Ramanshu'
 
-print(type(str))
+print(type(str1))
 
 a = 10
 
