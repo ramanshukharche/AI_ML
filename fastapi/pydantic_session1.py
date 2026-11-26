@@ -121,6 +121,30 @@ from pydantic import BaseModel, ValidationError
 class Product(BaseModel):
     product_id: int
     name: str
+    price: float
+    in_stock: bool
+
+raw_data5 = {
+    "product_id":"50", 
+    "price":"199,99", 
+    "in_stock":"1"
+}
+
+try: 
+    p = Product(**raw_data5)
+except ValidationError as e:
+    print(f'Total number of errors: {e.error_count()}')
+    for err in e.errors():
+        print(f'Fields {err['loc']}, Type: {err['type']}, Message: {err['msg']}')
+
+print('-'*50)
+
+
+
+from pydantic import BaseModel, ValidationError
+class Product(BaseModel):
+    product_id: int
+    name: str
 
 # Required and Non-nullable
 # what happens when value is not provided in dict
@@ -189,3 +213,5 @@ except ValidationError as e:
     print(f"Total number of error:{e.error_count()}")
     for err in e.errors():
         print(f"Fields: {err['loc']}, Type: {err['type']}, Message: {err['msg']}")
+
+
