@@ -29,6 +29,7 @@ print('-'*10)
 # s2 = Student(name = 33, age = 'Twenty', gpa = True)
 # print(s2)
 # Here, gpa value is True->1->1.0 sothat it does not raise error bcz of lax mode, pydantic by_default in lax mode
+
 """    s2 ERROR 
 Traceback (most recent call last):
   File "C:\Git_Practice\fastapi\pydantic_session1.py", line 28, in <module>
@@ -69,6 +70,8 @@ s3 = Student(**raw_data1)
 print(s3)
 print(type(s3.name), type(s3.age), type(s3.gpa))
 
+print('-'*20)
+
 raw_data1 ={
     'name':'Shyam',
     'age':22.5,
@@ -78,6 +81,7 @@ raw_data1 ={
 # s4 = Student(**raw_data1)
 # print(s4)
 # print(type(s4.name), type(s4.age), type(s4.gpa))
+
 """ s4 ERROR
 Traceback (most recent call last):
   File "C:\Git_Practice\fastapi\pydantic_session1.py", line 78, in <module>
@@ -126,7 +130,7 @@ class Product(BaseModel):
 
 raw_data5 = {
     "product_id":"50", 
-    "price":"199,99", 
+    "price":"199,99",       
     "in_stock":"1"
 }
 
@@ -136,6 +140,8 @@ except ValidationError as e:
     print(f'Total number of errors: {e.error_count()}')
     for err in e.errors():
         print(f'Fields {err['loc']}, Type: {err['type']}, Message: {err['msg']}')
+
+# In this example name attribute has no value this is 1st ERROR & price attribute has incorrect data_type this is 2nd ERROR. 
 
 print('-'*50)
 
@@ -215,3 +221,17 @@ except ValidationError as e:
         print(f"Fields: {err['loc']}, Type: {err['type']}, Message: {err['msg']}")
 
 
+#strict mode in pydantic
+
+from pydantic import BaseModel,ConfigDict
+
+class Student(BaseModel):
+    model_config = ConfigDict(strict=True)
+    age : int
+
+s = Student(age=22)
+print(s)
+
+
+s1 = Student(age='22')  # string data_type ->Error
+print(s1)

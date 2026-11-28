@@ -134,7 +134,7 @@ class Student:
         self.name = name
 
 class Person:
-    def __init__(self, name: str):
+    def __init__(self, name: str): 
         self.name = name
 
 def get_person_name(one_person: Person) -> str:
